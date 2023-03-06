@@ -8,7 +8,6 @@ interface IMyToken {
 }
 
 
-
 contract TokenizedBallot {
 
     // This is a type for a single proposal.
@@ -51,15 +50,11 @@ contract TokenizedBallot {
 
         // Account voteCount to the proposal
         proposals[proposal].voteCount += amount;
-
-
-
     }
-
 
     // Gets voting power
     function votingPower(address account) public view returns (uint256) {
-        return tokenContract.getPastVotes(account, targetBlockNumber);
+        return tokenContract.getPastVotes(account, targetBlockNumber) - votingPowerSpent[account];
     }
 
     /// @dev Computes the winning proposal taking all
